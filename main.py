@@ -9,7 +9,7 @@ import time
 import pysrt
 import os, sys
 
-video_formats = [".mp4", ".avi"]
+video_formats = [".mp4", ".avi", ".mkv"]
 
 
 BUFFER = 0.5
@@ -46,6 +46,8 @@ if len(sys.argv) != 3:
 
 DIR    = sys.argv[1]
 phrase = sys.argv[2]
+phrase = phrase.replace("_"," ")
+print phrase
 instance = vlc.Instance()
 mediaPlayer = instance.media_player_new()
 mediaPlayer_list = instance.media_list_new()
@@ -60,9 +62,11 @@ req_subs = [] # (file, sub)
 for m in media_files:
     print m[1]
     subs = pysrt.open(m[1], encoding='iso-8859-1')
+    
     for s in subs:
         if phrase in s.text.lower():
             req_subs.append((m[0], s))
+    
 
 for r in range(0, len(req_subs)):
     mediaPlayer_list.insert_media(instance.media_new(req_subs[r][0]), r)
