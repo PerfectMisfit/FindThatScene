@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2016 Pratik Sharma (pratiks.dce@gmail.com)
 #
-# Movie Phrase
+# FindThatScene
 
 import vlc # libVLC
 import time
